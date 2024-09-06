@@ -1,0 +1,1 @@
+To enable faster startup times, grafana plugins are [pre-installed into the custom docker image](https://grafana.com/docs/grafana/latest/setup-grafana/configure-docker/#build-a-grafana-docker-image-with-pre-installed-plugins) by specifying the plugins as a `--build-arg` in the [build.sh](../../build.sh#L6).  
