@@ -1,20 +1,6 @@
 apiVersion: 1
 
 datasources:
-  - name: mysql
-    uid: mysql123
-    type: mysql
-    access: proxy
-    url: ${DS_MYSQL_URL}
-    user: ${DS_MYSQL_USER}
-    jsonData:
-      database: copilot
-      maxOpenConns: 100
-      maxIdleConns: 100
-      maxIdleConnsAuto: true
-      connMaxLifetime: 14400
-    secureJsonData:
-      password: ${DS_MYSQL_PASSWORD}
   - name: grafana-github-datasource
     uid: github123
     type: grafana-github-datasource
@@ -22,4 +8,3 @@ datasources:
     access: proxy
     secureJsonData:
       accessToken: ${DS_GITHUB_TOKEN}
-      
