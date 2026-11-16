@@ -7,4 +7,17 @@ datasources:
     typeName: GitHub
     access: proxy
     secureJsonData:
-      accessToken: ${DS_GITHUB_TOKEN}
+      accessToken: $GITHUB_TOKEN
+  - name: grafana-athena-datasource
+    uid: athena123
+    type: grafana-athena-datasource
+    access: proxy
+    jsonData:
+      authType: keys
+      defaultRegion: us-west-2
+      catalog: AwsDataCatalog
+      database: github_webhooks_silver_dev
+      workgroup: github-webhooks-dev
+    secureJsonData:
+      accessKey: $AWS_ACCESS_KEY_ID
+      secretKey: $AWS_SECRET_ACCESS_KEY
