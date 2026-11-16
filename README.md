@@ -22,7 +22,7 @@ The Dockerfile uses `grafana cli` to install plugins; current Grafana images no 
 
 ### Amazon Athena
 
-The provisioned `grafana-athena-datasource` uses **Access & secret key** authentication (`authType: keys`) and defaults to AWS region `us-west-2`. Add the following variables to your local, git-ignored `.env` file using your values or 1Password secret references:
+The provisioned `athena-github-dataaource` (UID `athena-github`, plugin type `grafana-athena-datasource`) uses **Access & secret key** authentication (`authType: keys`) and defaults to AWS region `us-west-2`. The Pull Request Metrics dashboard uses this datasource. Add the following variables to your local, git-ignored `.env` file using your values or 1Password secret references:
 
 ```dotenv
 AWS_ACCESS_KEY_ID=your-access-key-id
@@ -30,6 +30,8 @@ AWS_SECRET_ACCESS_KEY=your-secret-access-key
 ```
 
 Athena is provisioned with catalog `AwsDataCatalog`, database `github_webhooks_silver_dev`, and workgroup `github-webhooks-dev`. Query results use the workgroup's configured output location unless overridden in Grafana.
+
+The file-provisioned dashboards use concrete datasource UIDs rather than import-only `${DS_*}` inputs: Actions and PR/Code use `athena-github`, Audit uses `athena-auditlogs`, and Copilot uses `athena-copilot`.
 
 The run script loads `.env` with `op run` and passes these AWS variables to Docker. Grafana reads the access and secret keys into the datasource's `secureJsonData` fields at startup, without embedding credential values in the image or provisioning file. Rebuild with `./build.sh`, then recreate the container with `./cleanup.sh` followed by `./run.sh`. The credentials need appropriate Athena, Glue, and S3 permissions; see the [Athena configuration guide](https://grafana.com/docs/plugins/grafana-athena-datasource/latest/configure/).
 

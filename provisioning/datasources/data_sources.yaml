@@ -8,8 +8,8 @@ datasources:
     access: proxy
     secureJsonData:
       accessToken: $GITHUB_TOKEN
-  - name: grafana-athena-datasource
-    uid: athena123
+  - name: athena-github-dataaource
+    uid: athena-github
     type: grafana-athena-datasource
     access: proxy
     jsonData:
@@ -17,6 +17,32 @@ datasources:
       defaultRegion: us-west-2
       catalog: AwsDataCatalog
       database: github_webhooks_silver_dev
+      workgroup: github-webhooks-dev
+    secureJsonData:
+      accessKey: $AWS_ACCESS_KEY_ID
+      secretKey: $AWS_SECRET_ACCESS_KEY
+  - name: athena-copilot-datasource
+    uid: athena-copilot
+    type: grafana-athena-datasource
+    access: proxy
+    jsonData:
+      authType: keys
+      defaultRegion: us-west-2
+      catalog: AwsDataCatalog
+      database: github_copilot_silver_dev
+      workgroup: github-webhooks-dev
+    secureJsonData:
+      accessKey: $AWS_ACCESS_KEY_ID
+      secretKey: $AWS_SECRET_ACCESS_KEY
+  - name: athena-auditlogs-datasource
+    uid: athena-auditlogs
+    type: grafana-athena-datasource
+    access: proxy
+    jsonData:
+      authType: keys
+      defaultRegion: us-west-2
+      catalog: AwsDataCatalog
+      database: github_audit_logs_bronze_dev
       workgroup: github-webhooks-dev
     secureJsonData:
       accessKey: $AWS_ACCESS_KEY_ID
